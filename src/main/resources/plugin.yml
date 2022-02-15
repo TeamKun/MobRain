@@ -1,0 +1,4 @@
+name: MobRain
+version: '${project.version}'
+main: net.kunmc.lab.mobrain.MobRain
+api-version: 1.16
