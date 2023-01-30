@@ -4,14 +4,16 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class MobRain extends JavaPlugin {
 
-    @Override
-    public void onEnable() {
-        // Plugin startup logic
+    private static MobRain plugin;
 
+    public static MobRain getPlugin(){
+        return plugin;
     }
 
     @Override
-    public void onDisable() {
-        // Plugin shutdown logic
+    public void onEnable() {
+        plugin = this;
+
+
     }
 }
