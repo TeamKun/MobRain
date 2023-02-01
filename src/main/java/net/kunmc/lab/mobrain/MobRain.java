@@ -4,7 +4,12 @@ import net.kunmc.lab.mobrain.command.CommandConst;
 import net.kunmc.lab.mobrain.command.CommandController;
 import net.kunmc.lab.mobrain.command.TabCompleter;
 import net.kunmc.lab.mobrain.config.ConfigManager;
+import net.kunmc.lab.mobrain.game.EntityList;
+import org.bukkit.entity.*;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class MobRain extends JavaPlugin {
 
@@ -19,6 +24,8 @@ public final class MobRain extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
+
+        EntityList.setMob();
 
         ConfigManager.loadConfig(false);
 
