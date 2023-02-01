@@ -62,7 +62,7 @@ public class CommandController implements CommandExecutor {
                         if(Integer.parseInt(args[1]) > 0){
                             ConfigManager.setConfig(CommandConst.CONFIG_RANGE);
                             ConfigManager.loadConfig(true);
-                            sender.sendMessage(ChatColor.GREEN + "range(範囲)：" + args[1] + "に設定しました");
+                            sender.sendMessage(ChatColor.GREEN + "range(範囲)：" + args[2] + "に設定しました");
                         }else{
                             sender.sendMessage(ChatColor.RED + "引数には自然数を入れてください");
                         }
@@ -70,7 +70,7 @@ public class CommandController implements CommandExecutor {
                         if(Integer.parseInt(args[1]) > 0){
                             ConfigManager.setConfig(CommandConst.CONFIG_FREQUENCY);
                             ConfigManager.loadConfig(true);
-                            sender.sendMessage(ChatColor.GREEN + "frequency(頻度)：" + args[1] + "に設定しました");
+                            sender.sendMessage(ChatColor.GREEN + "frequency(頻度)：" + args[2] + "に設定しました");
                         }else{
                             sender.sendMessage(ChatColor.RED + "引数には自然数を入れてください");
                         }
@@ -78,14 +78,14 @@ public class CommandController implements CommandExecutor {
                         if(Integer.parseInt(args[1]) > 0){
                             ConfigManager.setConfig(CommandConst.CONFIG_AMOUNT);
                             ConfigManager.loadConfig(true);
-                            sender.sendMessage(ChatColor.GREEN + "amount(量)：" + args[1] + "に設定しました");
+                            sender.sendMessage(ChatColor.GREEN + "amount(量)：" + args[2] + "に設定しました");
                         }else{
                             sender.sendMessage(ChatColor.RED + "引数には自然数を入れてください");
                         }
                     }else if(args[1].equals(CommandConst.CONFIG_PLAYER)){
                         ConfigManager.setConfig(CommandConst.CONFIG_PLAYER);
                         ConfigManager.loadConfig(true);
-                        sender.sendMessage(ChatColor.GREEN + "player(中心のプレイヤー)：" + args[1] + "に設定しました");
+                        sender.sendMessage(ChatColor.GREEN + "player(中心のプレイヤー)：" + args[2] + "に設定しました");
                     }else{
                         sender.sendMessage(ChatColor.RED + "コマンドの形式が異なります。");
                     }

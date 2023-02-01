@@ -2,6 +2,7 @@ package net.kunmc.lab.mobrain.config;
 
 import net.kunmc.lab.mobrain.MobRain;
 import net.kunmc.lab.mobrain.command.CommandConst;
+import net.kunmc.lab.mobrain.game.MainGameTask;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.HashMap;
@@ -43,6 +44,8 @@ public class ConfigManager {
         //対象のプレイヤー default:roadhog_kun
         String player = CommandConst.CONFIG_PLAYER;
         stringConfig.put(range, config.getString(player));
+
+        MainGameTask.task = false;
     }
 
     /**
