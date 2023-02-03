@@ -2,3 +2,9 @@ name: MobRain
 version: '${project.version}'
 main: net.kunmc.lab.mobrain.MobRain
 api-version: 1.16
+commands:
+  mr:
+    permission: MR
+permissions:
+  MR:
+    default: op

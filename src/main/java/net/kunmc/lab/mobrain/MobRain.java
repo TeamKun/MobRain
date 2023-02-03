@@ -5,21 +5,15 @@ import net.kunmc.lab.mobrain.command.CommandController;
 import net.kunmc.lab.mobrain.command.TabCompleter;
 import net.kunmc.lab.mobrain.config.ConfigManager;
 import net.kunmc.lab.mobrain.game.EntityList;
-import org.bukkit.entity.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 public final class MobRain extends JavaPlugin {
 
     public static MobRain plugin;
 
     public static boolean game = false;
-
-    public static MobRain getPlugin(){
-        return plugin;
-    }
 
     @Override
     public void onEnable() {
@@ -29,7 +23,15 @@ public final class MobRain extends JavaPlugin {
 
         ConfigManager.loadConfig(false);
 
-        getCommand(CommandConst.MAIN).setExecutor(new CommandController());
-        getCommand(CommandConst.MAIN).setTabCompleter(new TabCompleter());
+
+        Objects.requireNonNull(this.getCommand(CommandConst.MAIN)).setExecutor(new CommandController());
+        Objects.requireNonNull(this.getCommand(CommandConst.MAIN)).setTabCompleter(new TabCompleter());
+
+    }
+
+    @Override
+    public void onDisable() {
+        ConfigManager.loadConfig(true);
+        plugin.saveConfig();
     }
 }
