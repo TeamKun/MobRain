@@ -2,6 +2,7 @@ package net.kunmc.lab.mobrain.command;
 
 import net.kunmc.lab.mobrain.MobRain;
 import net.kunmc.lab.mobrain.config.ConfigManager;
+import net.kunmc.lab.mobrain.game.MainGameTask;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -19,6 +20,7 @@ public class CommandController implements CommandExecutor {
                     if(!MobRain.game){
                         //ゲームの開始処理
                         MobRain.game = true;
+                        MainGameTask.mainTask();
                         sender.sendMessage(ChatColor.GREEN + "ゲームを開始しました");
                     }else{
                         sender.sendMessage(ChatColor.RED + "ゲームはすでに開始されています");
@@ -37,6 +39,7 @@ public class CommandController implements CommandExecutor {
                 //reloadConfig
                 else if(args[0].equals(CommandConst.CONFIG_RELOAD)){
                     ConfigManager.loadConfig(true);
+                    MainGameTask.cnf = false;
                     sender.sendMessage(ChatColor.GREEN + "configをリロードしました");
                 }
                 //showConfig
@@ -62,6 +65,7 @@ public class CommandController implements CommandExecutor {
                         if(Integer.parseInt(args[1]) > 0){
                             ConfigManager.setConfig(CommandConst.CONFIG_RANGE);
                             ConfigManager.loadConfig(true);
+                            MainGameTask.cnf = false;
                             sender.sendMessage(ChatColor.GREEN + "range(範囲)：" + args[2] + "に設定しました");
                         }else{
                             sender.sendMessage(ChatColor.RED + "引数には自然数を入れてください");
@@ -70,6 +74,7 @@ public class CommandController implements CommandExecutor {
                         if(Integer.parseInt(args[1]) > 0){
                             ConfigManager.setConfig(CommandConst.CONFIG_FREQUENCY);
                             ConfigManager.loadConfig(true);
+                            MainGameTask.cnf = false;
                             sender.sendMessage(ChatColor.GREEN + "frequency(頻度)：" + args[2] + "に設定しました");
                         }else{
                             sender.sendMessage(ChatColor.RED + "引数には自然数を入れてください");
@@ -78,6 +83,7 @@ public class CommandController implements CommandExecutor {
                         if(Integer.parseInt(args[1]) > 0){
                             ConfigManager.setConfig(CommandConst.CONFIG_AMOUNT);
                             ConfigManager.loadConfig(true);
+                            MainGameTask.cnf = false;
                             sender.sendMessage(ChatColor.GREEN + "amount(量)：" + args[2] + "に設定しました");
                         }else{
                             sender.sendMessage(ChatColor.RED + "引数には自然数を入れてください");
@@ -85,6 +91,7 @@ public class CommandController implements CommandExecutor {
                     }else if(args[1].equals(CommandConst.CONFIG_PLAYER)){
                         ConfigManager.setConfig(CommandConst.CONFIG_PLAYER);
                         ConfigManager.loadConfig(true);
+                        MainGameTask.cnf = false;
                         sender.sendMessage(ChatColor.GREEN + "player(中心のプレイヤー)：" + args[2] + "に設定しました");
                     }else{
                         sender.sendMessage(ChatColor.RED + "コマンドの形式が異なります。");

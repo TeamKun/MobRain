@@ -45,7 +45,7 @@ public class ConfigManager {
         String player = CommandConst.CONFIG_PLAYER;
         stringConfig.put(range, config.getString(player));
 
-        MainGameTask.task = false;
+        MainGameTask.cnf = false;
     }
 
     /**
