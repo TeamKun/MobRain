@@ -35,17 +35,16 @@ public class ConfigManager {
 
         //頻度 default:
         String frequency = CommandConst.CONFIG_FREQUENCY;
-        integerConfig.put(range, config.getInt(frequency));
+        integerConfig.put(frequency, config.getInt(frequency));
 
         //量 default:
         String amount = CommandConst.CONFIG_AMOUNT;
-        integerConfig.put(range, config.getInt(amount));
+        integerConfig.put(amount, config.getInt(amount));
 
         //対象のプレイヤー default:roadhog_kun
         String player = CommandConst.CONFIG_PLAYER;
-        stringConfig.put(range, config.getString(player));
+        stringConfig.put(player, config.getString(player));
 
-        MainGameTask.cnf = false;
     }
 
     /**

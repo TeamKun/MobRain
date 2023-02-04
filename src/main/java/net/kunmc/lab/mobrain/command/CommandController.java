@@ -7,11 +7,12 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
 public class CommandController implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, Command command, @NotNull String label, String[] args) {
         if(command.getName().equals(CommandConst.MAIN)){
             //start,stop,reloadConfig
             if(args.length == 1){
@@ -44,7 +45,7 @@ public class CommandController implements CommandExecutor {
                 }
                 //showConfig
                 else if(args[0].equals(CommandConst.CONFIG_SHOW)){
-                    ConfigManager.loadConfig(true);
+                    ConfigManager.loadConfig(false);
                     sender.sendMessage(ChatColor.GREEN + "configを表示します");
                     sender.sendMessage(ChatColor.AQUA + "------config一覧------");
                     sender.sendMessage("range(範囲)：" + ConfigManager.integerConfig.get(CommandConst.CONFIG_RANGE));
@@ -62,37 +63,41 @@ public class CommandController implements CommandExecutor {
             else if(args.length == 3){
                 if(args[0].equals(CommandConst.CONFIG_SET)){
                     if(args[1].equals(CommandConst.CONFIG_RANGE)){
-                        if(Integer.parseInt(args[1]) > 0){
+                        if(Integer.parseInt(args[2]) > 0){
+                            ConfigManager.integerConfig.put(CommandConst.CONFIG_RANGE,Integer.parseInt(args[2]));
                             ConfigManager.setConfig(CommandConst.CONFIG_RANGE);
-                            ConfigManager.loadConfig(true);
+                            ConfigManager.loadConfig(false);
                             MainGameTask.cnf = false;
-                            sender.sendMessage(ChatColor.GREEN + "range(範囲)：" + args[2] + "に設定しました");
+                            sender.sendMessage(ChatColor.GREEN + "range(範囲)を" + args[2] + "に設定しました");
                         }else{
                             sender.sendMessage(ChatColor.RED + "引数には自然数を入れてください");
                         }
                     }else if(args[1].equals(CommandConst.CONFIG_FREQUENCY)){
-                        if(Integer.parseInt(args[1]) > 0){
+                        if(Integer.parseInt(args[2]) > 0){
+                            ConfigManager.integerConfig.put(CommandConst.CONFIG_FREQUENCY,Integer.parseInt(args[2]));
                             ConfigManager.setConfig(CommandConst.CONFIG_FREQUENCY);
-                            ConfigManager.loadConfig(true);
+                            ConfigManager.loadConfig(false);
                             MainGameTask.cnf = false;
-                            sender.sendMessage(ChatColor.GREEN + "frequency(頻度)：" + args[2] + "に設定しました");
+                            sender.sendMessage(ChatColor.GREEN + "frequency(出現頻度[tick])を" + args[2] + "に設定しました");
                         }else{
                             sender.sendMessage(ChatColor.RED + "引数には自然数を入れてください");
                         }
                     }else if(args[1].equals(CommandConst.CONFIG_AMOUNT)){
-                        if(Integer.parseInt(args[1]) > 0){
+                        if(Integer.parseInt(args[2]) > 0){
+                            ConfigManager.integerConfig.put(CommandConst.CONFIG_AMOUNT,Integer.parseInt(args[2]));
                             ConfigManager.setConfig(CommandConst.CONFIG_AMOUNT);
-                            ConfigManager.loadConfig(true);
+                            ConfigManager.loadConfig(false);
                             MainGameTask.cnf = false;
-                            sender.sendMessage(ChatColor.GREEN + "amount(量)：" + args[2] + "に設定しました");
+                            sender.sendMessage(ChatColor.GREEN + "amount(量)を" + args[2] + "に設定しました");
                         }else{
                             sender.sendMessage(ChatColor.RED + "引数には自然数を入れてください");
                         }
                     }else if(args[1].equals(CommandConst.CONFIG_PLAYER)){
+                        ConfigManager.stringConfig.put(CommandConst.CONFIG_PLAYER,args[2]);
                         ConfigManager.setConfig(CommandConst.CONFIG_PLAYER);
-                        ConfigManager.loadConfig(true);
+                        ConfigManager.loadConfig(false);
                         MainGameTask.cnf = false;
-                        sender.sendMessage(ChatColor.GREEN + "player(中心のプレイヤー)：" + args[2] + "に設定しました");
+                        sender.sendMessage(ChatColor.GREEN + "player(中心のプレイヤー)を" + args[2] + "に設定しました");
                     }else{
                         sender.sendMessage(ChatColor.RED + "コマンドの形式が異なります。");
                     }
