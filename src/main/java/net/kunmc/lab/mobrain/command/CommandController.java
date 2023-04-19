@@ -41,6 +41,7 @@ public class CommandController implements CommandExecutor {
                 else if(args[0].equals(CommandConst.CONFIG_RELOAD)){
                     ConfigManager.loadConfig(true);
                     MainGameTask.cnf = false;
+                    MainGameTask.mainTask();
                     sender.sendMessage(ChatColor.GREEN + "configをリロードしました");
                 }
                 //showConfig
@@ -63,7 +64,7 @@ public class CommandController implements CommandExecutor {
             else if(args.length == 3){
                 if(args[0].equals(CommandConst.CONFIG_SET)){
                     if(args[1].equals(CommandConst.CONFIG_RANGE)){
-                        if(Integer.parseInt(args[2]) > 0){
+                        if(args[2].matches("[+-]?\\d*(\\.\\d+)?") && Integer.parseInt(args[2])>0){
                             ConfigManager.integerConfig.put(CommandConst.CONFIG_RANGE,Integer.parseInt(args[2]));
                             ConfigManager.setConfig(CommandConst.CONFIG_RANGE);
                             ConfigManager.loadConfig(false);
@@ -73,21 +74,23 @@ public class CommandController implements CommandExecutor {
                             sender.sendMessage(ChatColor.RED + "引数には自然数を入れてください");
                         }
                     }else if(args[1].equals(CommandConst.CONFIG_FREQUENCY)){
-                        if(Integer.parseInt(args[2]) > 0){
+                        if(args[2].matches("[+-]?\\d*(\\.\\d+)?") && Integer.parseInt(args[2])>0){
                             ConfigManager.integerConfig.put(CommandConst.CONFIG_FREQUENCY,Integer.parseInt(args[2]));
                             ConfigManager.setConfig(CommandConst.CONFIG_FREQUENCY);
                             ConfigManager.loadConfig(false);
                             MainGameTask.cnf = false;
+                            MainGameTask.mainTask();
                             sender.sendMessage(ChatColor.GREEN + "frequency(出現頻度[tick])を" + args[2] + "に設定しました");
                         }else{
                             sender.sendMessage(ChatColor.RED + "引数には自然数を入れてください");
                         }
                     }else if(args[1].equals(CommandConst.CONFIG_AMOUNT)){
-                        if(Integer.parseInt(args[2]) > 0){
+                        if(args[2].matches("[+-]?\\d*(\\.\\d+)?") && Integer.parseInt(args[2])>0){
                             ConfigManager.integerConfig.put(CommandConst.CONFIG_AMOUNT,Integer.parseInt(args[2]));
                             ConfigManager.setConfig(CommandConst.CONFIG_AMOUNT);
                             ConfigManager.loadConfig(false);
                             MainGameTask.cnf = false;
+                            MainGameTask.mainTask();
                             sender.sendMessage(ChatColor.GREEN + "amount(量)を" + args[2] + "に設定しました");
                         }else{
                             sender.sendMessage(ChatColor.RED + "引数には自然数を入れてください");
@@ -97,6 +100,7 @@ public class CommandController implements CommandExecutor {
                         ConfigManager.setConfig(CommandConst.CONFIG_PLAYER);
                         ConfigManager.loadConfig(false);
                         MainGameTask.cnf = false;
+                        MainGameTask.mainTask();
                         sender.sendMessage(ChatColor.GREEN + "player(中心のプレイヤー)を" + args[2] + "に設定しました");
                     }else{
                         sender.sendMessage(ChatColor.RED + "コマンドの形式が異なります。");

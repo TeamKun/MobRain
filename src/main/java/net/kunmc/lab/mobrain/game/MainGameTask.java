@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
 import java.util.Objects;
 import java.util.Random;
@@ -28,21 +29,17 @@ public class MainGameTask {
         new BukkitRunnable(){
             int count = 0;
 
-            int frequency = ConfigManager.integerConfig.get(CommandConst.CONFIG_FREQUENCY);
-            int amount = ConfigManager.integerConfig.get(CommandConst.CONFIG_AMOUNT);
-            int range = ConfigManager.integerConfig.get(CommandConst.CONFIG_RANGE);
+            final int frequency = ConfigManager.integerConfig.get(CommandConst.CONFIG_FREQUENCY);
+            final int amount = ConfigManager.integerConfig.get(CommandConst.CONFIG_AMOUNT);
+            final int range = ConfigManager.integerConfig.get(CommandConst.CONFIG_RANGE);
 
-            String playerName = ConfigManager.stringConfig.get(CommandConst.CONFIG_PLAYER);
+            final String playerName = ConfigManager.stringConfig.get(CommandConst.CONFIG_PLAYER);
 
             @Override
             public void run() {
                 if (MobRain.game) {
                     if (!cnf) {
-                        frequency = ConfigManager.integerConfig.get(CommandConst.CONFIG_FREQUENCY);
-                        amount = ConfigManager.integerConfig.get(CommandConst.CONFIG_AMOUNT);
-                        range = ConfigManager.integerConfig.get(CommandConst.CONFIG_RANGE);
-                        playerName = ConfigManager.stringConfig.get(CommandConst.CONFIG_PLAYER);
-                        cnf = true;
+                        this.cancel();
                     }
                     if (count == frequency) {
                         //Mobの生成
@@ -52,6 +49,8 @@ public class MainGameTask {
                         count = count + 1;
                     }
 
+                }else{
+                    this.cancel();
                 }
             }
         }.runTaskTimer(MobRain.plugin,0,1);
@@ -102,6 +101,7 @@ public class MainGameTask {
                 mob.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE,1000000,1,true));
                 //低速落下(落下ダメージ防止)
                 mob.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING,1000000,1,true));
+
             }
         }
     }
