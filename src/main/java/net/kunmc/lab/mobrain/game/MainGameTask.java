@@ -6,20 +6,15 @@ import net.kunmc.lab.mobrain.config.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.entity.Creature;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.Vector;
 
 import java.util.Objects;
 import java.util.Random;
-import java.util.UUID;
 
 public class MainGameTask {
 
@@ -115,8 +110,6 @@ public class MainGameTask {
                 LivingEntity mob = (LivingEntity) player.getWorld().spawnEntity(loc,type);
                 //火炎耐性(昼の炎上防止)
                 mob.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE,1000000,1,true));
-                //低速落下(落下ダメージ防止)
-                mob.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING,1000000,1,true));
                 //落下速度指定
                 new BukkitRunnable() {
                     @Override
