@@ -52,6 +52,7 @@ public class CommandController implements CommandExecutor {
                     sender.sendMessage("range(範囲)：" + ConfigManager.integerConfig.get(CommandConst.CONFIG_RANGE));
                     sender.sendMessage("frequency(頻度)：" + ConfigManager.integerConfig.get(CommandConst.CONFIG_FREQUENCY));
                     sender.sendMessage("amount(量)：" + ConfigManager.integerConfig.get(CommandConst.CONFIG_AMOUNT));
+                    sender.sendMessage("speed(落下速度)：" + ConfigManager.integerConfig.get(CommandConst.CONFIG_SPEED));
                     sender.sendMessage("player(中心のプレイヤー)：" + ConfigManager.stringConfig.get(CommandConst.CONFIG_PLAYER));
                     sender.sendMessage(ChatColor.AQUA + "------config一覧------");
                 }
@@ -69,7 +70,7 @@ public class CommandController implements CommandExecutor {
                             ConfigManager.setConfig(CommandConst.CONFIG_RANGE);
                             ConfigManager.loadConfig(false);
                             MainGameTask.cnf = false;
-                            sender.sendMessage(ChatColor.GREEN + "range(範囲)を" + args[2] + "に設定しました");
+                            sender.sendMessage(ChatColor.GREEN + "範囲を" + args[2] + "に設定しました");
                         }else{
                             sender.sendMessage(ChatColor.RED + "引数には自然数を入れてください");
                         }
@@ -80,7 +81,7 @@ public class CommandController implements CommandExecutor {
                             ConfigManager.loadConfig(false);
                             MainGameTask.cnf = false;
                             MainGameTask.mainTask();
-                            sender.sendMessage(ChatColor.GREEN + "frequency(出現頻度[tick])を" + args[2] + "に設定しました");
+                            sender.sendMessage(ChatColor.GREEN + "出現頻度[tick]を" + args[2] + "に設定しました");
                         }else{
                             sender.sendMessage(ChatColor.RED + "引数には自然数を入れてください");
                         }
@@ -91,7 +92,18 @@ public class CommandController implements CommandExecutor {
                             ConfigManager.loadConfig(false);
                             MainGameTask.cnf = false;
                             MainGameTask.mainTask();
-                            sender.sendMessage(ChatColor.GREEN + "amount(量)を" + args[2] + "に設定しました");
+                            sender.sendMessage(ChatColor.GREEN + "1度に涌くMobの量を" + args[2] + "に設定しました");
+                        }else{
+                            sender.sendMessage(ChatColor.RED + "引数には自然数を入れてください");
+                        }
+                    }else if(args[1].equals(CommandConst.CONFIG_SPEED)){
+                        if(args[2].matches("[+-]?\\d*(\\.\\d+)?") && Integer.parseInt(args[2])>0){
+                            ConfigManager.integerConfig.put(CommandConst.CONFIG_SPEED,Integer.parseInt(args[2]));
+                            ConfigManager.setConfig(CommandConst.CONFIG_SPEED);
+                            ConfigManager.loadConfig(false);
+                            MainGameTask.cnf = false;
+                            MainGameTask.mainTask();
+                            sender.sendMessage(ChatColor.GREEN + "落下速度を" + args[2] + "に設定しました");
                         }else{
                             sender.sendMessage(ChatColor.RED + "引数には自然数を入れてください");
                         }
@@ -101,7 +113,7 @@ public class CommandController implements CommandExecutor {
                         ConfigManager.loadConfig(false);
                         MainGameTask.cnf = false;
                         MainGameTask.mainTask();
-                        sender.sendMessage(ChatColor.GREEN + "player(中心のプレイヤー)を" + args[2] + "に設定しました");
+                        sender.sendMessage(ChatColor.GREEN + "中心のプレイヤーを" + args[2] + "に設定しました");
                     }else{
                         sender.sendMessage(ChatColor.RED + "コマンドの形式が異なります。");
                     }

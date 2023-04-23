@@ -2,7 +2,6 @@ package net.kunmc.lab.mobrain.config;
 
 import net.kunmc.lab.mobrain.MobRain;
 import net.kunmc.lab.mobrain.command.CommandConst;
-import net.kunmc.lab.mobrain.game.MainGameTask;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.HashMap;
@@ -40,6 +39,10 @@ public class ConfigManager {
         //量 default:
         String amount = CommandConst.CONFIG_AMOUNT;
         integerConfig.put(amount, config.getInt(amount));
+
+        //落下速度
+        String speed = CommandConst.CONFIG_SPEED;
+        integerConfig.put(speed, config.getInt(speed));
 
         //対象のプレイヤー default:roadhog_kun
         String player = CommandConst.CONFIG_PLAYER;

@@ -6,6 +6,8 @@ import net.kunmc.lab.mobrain.config.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -17,10 +19,14 @@ import org.bukkit.util.Vector;
 
 import java.util.Objects;
 import java.util.Random;
+import java.util.UUID;
 
 public class MainGameTask {
 
     public static boolean cnf = false;
+
+    // このUUIDは一意である必要があります
+    private static final UUID CUSTOM_FALL_SPEED_MODIFIER_UUID = UUID.randomUUID();
 
     public static void mainTask(){
 
@@ -32,6 +38,7 @@ public class MainGameTask {
             final int frequency = ConfigManager.integerConfig.get(CommandConst.CONFIG_FREQUENCY);
             final int amount = ConfigManager.integerConfig.get(CommandConst.CONFIG_AMOUNT);
             final int range = ConfigManager.integerConfig.get(CommandConst.CONFIG_RANGE);
+            final int speed = ConfigManager.integerConfig.get(CommandConst.CONFIG_RANGE);
 
             final String playerName = ConfigManager.stringConfig.get(CommandConst.CONFIG_PLAYER);
 
@@ -43,7 +50,7 @@ public class MainGameTask {
                     }
                     if (count == frequency) {
                         //Mobの生成
-                        mobSpawnLogic(amount,range,playerName);
+                        mobSpawnLogic(amount,range,speed,playerName);
                         count = 0 ;
                     }else{
                         count = count + 1;
@@ -56,7 +63,7 @@ public class MainGameTask {
         }.runTaskTimer(MobRain.plugin,0,1);
     }
 
-    public static void mobSpawnLogic(int amount,int range,String playerName){
+    public static void mobSpawnLogic(int amount,int range,int speed,String playerName){
         //プレイヤー導出
         Player player = Bukkit.getPlayer(Objects.requireNonNull(playerName));
         if(player==null) return;
@@ -101,7 +108,11 @@ public class MainGameTask {
                 mob.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE,1000000,1,true));
                 //低速落下(落下ダメージ防止)
                 mob.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING,1000000,1,true));
-
+                mob.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED)
+                        .addModifier(new AttributeModifier(CUSTOM_FALL_SPEED_MODIFIER_UUID,
+                                "customFallSpeed",
+                                (double) speed * 0.01,
+                                AttributeModifier.Operation.MULTIPLY_SCALAR_1));
             }
         }
     }

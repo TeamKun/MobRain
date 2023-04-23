@@ -24,11 +24,11 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
                         .filter(e -> e.startsWith(input)).collect(Collectors.toList()));
             } else if (args.length == 2 && args[0].equals(CommandConst.CONFIG_SET)) {
                 String input = args[args.length - 1];
-                String[] target = {CommandConst.CONFIG_RANGE, CommandConst.CONFIG_FREQUENCY, CommandConst.CONFIG_AMOUNT, CommandConst.CONFIG_PLAYER};
+                String[] target = {CommandConst.CONFIG_RANGE, CommandConst.CONFIG_FREQUENCY, CommandConst.CONFIG_AMOUNT, CommandConst.CONFIG_PLAYER, CommandConst.CONFIG_SPEED};
                 completions.addAll(Arrays.asList(target).stream()
                         .filter(e -> e.startsWith(input)).collect(Collectors.toList()));
             } else if (args.length == 3 && args[0].equals(CommandConst.CONFIG_SET)) {
-                if (args[1].equals(CommandConst.CONFIG_RANGE) || args[1].equals(CommandConst.CONFIG_FREQUENCY) || args[1].equals(CommandConst.CONFIG_AMOUNT)) {
+                if (args[1].equals(CommandConst.CONFIG_RANGE) || args[1].equals(CommandConst.CONFIG_FREQUENCY) || args[1].equals(CommandConst.CONFIG_AMOUNT) || args[1].equals(CommandConst.CONFIG_SPEED)) {
                     completions.add("<num>");
                 } else if (args[1].equals(CommandConst.CONFIG_PLAYER)) {
                     return Bukkit.getOnlinePlayers().stream()
