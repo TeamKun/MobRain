@@ -25,9 +25,6 @@ public class MainGameTask {
 
     public static boolean cnf = false;
 
-    // このUUIDは一意である必要があります
-    private static final UUID CUSTOM_FALL_SPEED_MODIFIER_UUID = UUID.randomUUID();
-
     public static void mainTask(){
 
         cnf = true;
@@ -101,6 +98,11 @@ public class MainGameTask {
             if(random.nextInt(1000) == 0){
                 type =EntityType.WITHER;
                 LivingEntity mob = (LivingEntity) player.getWorld().spawnEntity(loc,type);
+                Objects.requireNonNull(mob.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED))
+                        .addModifier(new AttributeModifier(mob.getUniqueId(),
+                                "customFallSpeed",
+                                (double) speed * 0.01,
+                                AttributeModifier.Operation.MULTIPLY_SCALAR_1));
             }else{
                 type = EntityList.entityList.get(random.nextInt(EntityList.entityList.size()));
                 LivingEntity mob = (LivingEntity) player.getWorld().spawnEntity(loc,type);
@@ -108,8 +110,8 @@ public class MainGameTask {
                 mob.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE,1000000,1,true));
                 //低速落下(落下ダメージ防止)
                 mob.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING,1000000,1,true));
-                mob.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED)
-                        .addModifier(new AttributeModifier(CUSTOM_FALL_SPEED_MODIFIER_UUID,
+                Objects.requireNonNull(mob.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED))
+                        .addModifier(new AttributeModifier(mob.getUniqueId(),
                                 "customFallSpeed",
                                 (double) speed * 0.01,
                                 AttributeModifier.Operation.MULTIPLY_SCALAR_1));
