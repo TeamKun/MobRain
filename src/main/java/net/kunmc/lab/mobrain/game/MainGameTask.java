@@ -98,11 +98,18 @@ public class MainGameTask {
             if(random.nextInt(1000) == 0){
                 type =EntityType.WITHER;
                 LivingEntity mob = (LivingEntity) player.getWorld().spawnEntity(loc,type);
-                Objects.requireNonNull(mob.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED))
-                        .addModifier(new AttributeModifier(mob.getUniqueId(),
-                                "customFallSpeed",
-                                (double) speed * 0.01,
-                                AttributeModifier.Operation.MULTIPLY_SCALAR_1));
+                //落下速度指定
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        Material blockMaterial = mob.getLocation().subtract(0, 1, 0).getBlock().getType();
+                        if (blockMaterial != Material.AIR) {
+                            mob.setVelocity(mob.getVelocity().setY(speed * -0.01));
+                        } else {
+                            cancel();
+                        }
+                    }
+                }.runTaskTimer(MobRain.plugin, 0L, 1L);
             }else{
                 type = EntityList.entityList.get(random.nextInt(EntityList.entityList.size()));
                 LivingEntity mob = (LivingEntity) player.getWorld().spawnEntity(loc,type);
@@ -110,11 +117,18 @@ public class MainGameTask {
                 mob.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE,1000000,1,true));
                 //低速落下(落下ダメージ防止)
                 mob.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING,1000000,1,true));
-                Objects.requireNonNull(mob.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED))
-                        .addModifier(new AttributeModifier(mob.getUniqueId(),
-                                "customFallSpeed",
-                                (double) speed * 0.01,
-                                AttributeModifier.Operation.MULTIPLY_SCALAR_1));
+                //落下速度指定
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        Material blockMaterial = mob.getLocation().subtract(0, 1, 0).getBlock().getType();
+                        if (blockMaterial != Material.AIR) {
+                            mob.setVelocity(mob.getVelocity().setY(speed * -0.01));
+                        } else {
+                            cancel();
+                        }
+                    }
+                }.runTaskTimer(MobRain.plugin, 0L, 1L);
             }
         }
     }
