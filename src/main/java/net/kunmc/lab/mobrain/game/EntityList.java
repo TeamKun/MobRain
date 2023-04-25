@@ -15,7 +15,6 @@ public class EntityList {
         entityList.add(EntityType.VINDICATOR);
         entityList.add(EntityType.VEX);
         entityList.add(EntityType.EVOKER);
-        entityList.add(EntityType.ELDER_GUARDIAN);
         entityList.add(EntityType.GUARDIAN);
         entityList.add(EntityType.GHAST);
         entityList.add(EntityType.SKELETON);

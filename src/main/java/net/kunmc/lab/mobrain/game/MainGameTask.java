@@ -98,9 +98,11 @@ public class MainGameTask {
                     @Override
                     public void run() {
                         Material blockMaterial = mob.getLocation().subtract(0, 1, 0).getBlock().getType();
-                        if (blockMaterial != Material.AIR) {
-                            mob.setVelocity(mob.getVelocity().setY(speed * -0.01));
-                        } else {
+                        if (blockMaterial == Material.AIR) {
+                            mob.setVelocity(mob.getVelocity().setY((-0.1 * speed) / 20));
+                        }else if(mob.isDead()){
+                            cancel();
+                        }else{
                             cancel();
                         }
                     }
@@ -115,9 +117,11 @@ public class MainGameTask {
                     @Override
                     public void run() {
                         Material blockMaterial = mob.getLocation().subtract(0, 1, 0).getBlock().getType();
-                        if (blockMaterial != Material.AIR) {
-                            mob.setVelocity(mob.getVelocity().setY(speed * -0.01));
-                        } else {
+                        if (blockMaterial == Material.AIR) {
+                            mob.setVelocity(mob.getVelocity().setY((-0.1 * speed) / 20));
+                        }else if(mob.isDead()){
+                            cancel();
+                        }else {
                             cancel();
                         }
                     }
