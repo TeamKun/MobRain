@@ -30,7 +30,7 @@ public class MainGameTask {
             final int frequency = ConfigManager.integerConfig.get(CommandConst.CONFIG_FREQUENCY);
             final int amount = ConfigManager.integerConfig.get(CommandConst.CONFIG_AMOUNT);
             final int range = ConfigManager.integerConfig.get(CommandConst.CONFIG_RANGE);
-            final int speed = ConfigManager.integerConfig.get(CommandConst.CONFIG_RANGE);
+            final int speed = ConfigManager.integerConfig.get(CommandConst.CONFIG_SPEED);
 
             final String playerName = ConfigManager.stringConfig.get(CommandConst.CONFIG_PLAYER);
 
@@ -90,7 +90,7 @@ public class MainGameTask {
             }
 
             //mob処理(0.1%でウィザー)
-            if(random.nextInt(1000) == 0){
+            if(random.nextInt(999) == 0){
                 type =EntityType.WITHER;
                 LivingEntity mob = (LivingEntity) player.getWorld().spawnEntity(loc,type);
                 //落下速度指定
@@ -99,14 +99,14 @@ public class MainGameTask {
                     public void run() {
                         Material blockMaterial = mob.getLocation().subtract(0, 1, 0).getBlock().getType();
                         if (blockMaterial == Material.AIR) {
-                            mob.setVelocity(mob.getVelocity().setY((-0.1 * speed) / 20));
+                            mob.setVelocity(mob.getVelocity().setY((-0.1 * speed)/20));
                         }else if(mob.isDead()){
                             cancel();
                         }else{
                             cancel();
                         }
                     }
-                }.runTaskTimer(MobRain.plugin, 0L, 1L);
+                }.runTaskTimer(MobRain.plugin, 0, 1);
             }else{
                 type = EntityList.entityList.get(random.nextInt(EntityList.entityList.size()));
                 LivingEntity mob = (LivingEntity) player.getWorld().spawnEntity(loc,type);
@@ -118,14 +118,14 @@ public class MainGameTask {
                     public void run() {
                         Material blockMaterial = mob.getLocation().subtract(0, 1, 0).getBlock().getType();
                         if (blockMaterial == Material.AIR) {
-                            mob.setVelocity(mob.getVelocity().setY((-0.1 * speed) / 20));
+                            mob.setVelocity(mob.getVelocity().setY((-0.1 * speed)/20));
                         }else if(mob.isDead()){
                             cancel();
                         }else {
                             cancel();
                         }
                     }
-                }.runTaskTimer(MobRain.plugin, 0L, 1L);
+                }.runTaskTimer(MobRain.plugin, 0, 1);
             }
         }
     }

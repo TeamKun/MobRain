@@ -28,23 +28,23 @@ public class ConfigManager {
         //configの取得
         config = MobRain.plugin.getConfig();
 
-        //範囲 default:
+        //範囲 default:64
         String range = CommandConst.CONFIG_RANGE;
         integerConfig.put(range, config.getInt(range));
 
-        //頻度 default:
+        //頻度 default:200
         String frequency = CommandConst.CONFIG_FREQUENCY;
         integerConfig.put(frequency, config.getInt(frequency));
 
-        //量 default:
+        //量 default:5
         String amount = CommandConst.CONFIG_AMOUNT;
         integerConfig.put(amount, config.getInt(amount));
 
-        //落下速度
+        //落下速度 default:10
         String speed = CommandConst.CONFIG_SPEED;
         integerConfig.put(speed, config.getInt(speed));
 
-        //対象のプレイヤー default:roadhog_kun
+        //対象のプレイヤー default:playerName
         String player = CommandConst.CONFIG_PLAYER;
         stringConfig.put(player, config.getString(player));
 
