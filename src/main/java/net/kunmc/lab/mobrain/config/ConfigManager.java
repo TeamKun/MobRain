@@ -32,15 +32,15 @@ public class ConfigManager {
         String range = CommandConst.CONFIG_RANGE;
         integerConfig.put(range, config.getInt(range));
 
-        //頻度 default:200
+        //頻度 default:20
         String frequency = CommandConst.CONFIG_FREQUENCY;
         integerConfig.put(frequency, config.getInt(frequency));
 
-        //量 default:5
+        //量 default:1
         String amount = CommandConst.CONFIG_AMOUNT;
         integerConfig.put(amount, config.getInt(amount));
 
-        //落下速度 default:10
+        //落下速度 default:50
         String speed = CommandConst.CONFIG_SPEED;
         integerConfig.put(speed, config.getInt(speed));
 

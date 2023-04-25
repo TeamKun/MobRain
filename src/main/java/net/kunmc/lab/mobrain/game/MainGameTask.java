@@ -97,7 +97,7 @@ public class MainGameTask {
                 new BukkitRunnable() {
                     @Override
                     public void run() {
-                        Material blockMaterial = mob.getLocation().subtract(0, 1, 0).getBlock().getType();
+                        Material blockMaterial = mob.getLocation().subtract(0, 5, 0).getBlock().getType();
                         if (blockMaterial == Material.AIR) {
                             mob.setVelocity(mob.getVelocity().setY((-0.1 * speed)/20));
                         }else if(mob.isDead()){
@@ -116,7 +116,7 @@ public class MainGameTask {
                 new BukkitRunnable() {
                     @Override
                     public void run() {
-                        Material blockMaterial = mob.getLocation().subtract(0, 1, 0).getBlock().getType();
+                        Material blockMaterial = mob.getLocation().subtract(0, 5, 0).getBlock().getType();
                         if (blockMaterial == Material.AIR) {
                             mob.setVelocity(mob.getVelocity().setY((-0.1 * speed)/20));
                         }else if(mob.isDead()){

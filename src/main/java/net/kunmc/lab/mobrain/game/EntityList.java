@@ -26,7 +26,6 @@ public class EntityList {
         entityList.add(EntityType.DROWNED);
         entityList.add(EntityType.PIGLIN_BRUTE);
         entityList.add(EntityType.PILLAGER);
-        entityList.add(EntityType.PHANTOM);
         entityList.add(EntityType.BLAZE);
         entityList.add(EntityType.HOGLIN);
         entityList.add(EntityType.MAGMA_CUBE);

@@ -1,5 +1,5 @@
 range: 64
-frequency: 200
-amount: 5
+frequency: 20
+amount: 1
 speed: 10
 player: playerName
